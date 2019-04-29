@@ -26,10 +26,17 @@ RUN conda install --yes \
     -c intake \
     -c conda-forge \
     -c anaconda \
+    -c plotly \
+    -c r \
+    r-irkernel \
     jupyterlab=0.35.4 \
+    plotly \
+    ipywidgets \
     # jupyterlab_launcher=0.13.1 \
     jupyterlab_server \
+    psycopg2 \
     alembic \
+    jupyterlab-dash=0.1.0a2 \
     # pyspark=2.4.0 \
 
     && conda clean -tipsy
@@ -39,6 +46,7 @@ RUN pip install --upgrade pip
 RUN pip install pipenv \
                 nbserverproxy \
                 jupyterlab-git \
+                jupyterlab_sql \
                 --upgrade --no-cache-dir \
                 --upgrade-strategy only-if-needed
 
@@ -49,11 +57,18 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager \
                                  jupyter-leaflet \
                                  @jupyterlab/git \
                                  jupyterlab-drawio \
-                                 dask-labextension
+                                 dask-labextension \
+                                 @jupyterlab/plotly-extension \
+                                 @jupyter-widgets/jupyterlab-manager \
+                                 plotlywidget \
+                                 @lckr/jupyterlab_variableinspector \
+                                 @jupyterlab/toc \
+                                 jupyterlab-dash@0.1.0-alpha.2
 
 RUN jupyter serverextension enable --py nbserverproxy \
                                         jupyterlab \
                                         jupyterlab_git \
+                                        jupyterlab_sql \
                                         --sys-prefix
 
 

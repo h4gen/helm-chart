@@ -46,20 +46,8 @@ if [ "$GCSFUSE_BUCKET" ]; then
 fi
 # Run extra commands
 
-# export PYSPARK_PYTHON=python3
-# export PYSPARK_DRIVER_PYTHON=python3
-# export SPARK_PUBLIC_DNS=hub.idalab.de${JUPYTERHUB_SERVICE_PREFIX}proxy/4040/jobs/
-# export SPARK_OPTS="--deploy-mode=client \
-# --master=k8s://https://kubernetes.default.svc \
-# --conf spark.driver.host=`hostname -I` \
-# --conf spark.driver.pod.name=${HOSTNAME} \
-# --conf spark.kubernetes.container.image=idalab/spark-py:spark \
-# --conf spark.ui.proxyBase=${JUPYTERHUB_SERVICE_PREFIX}proxy/4040 \
-# --conf spark.executor.instances=2 \
-# --driver-java-options=-Xms1024M \
-# --driver-java-options=-Xmx4096M \
-# --driver-java-options=-Dlog4j.logLevel=info"
-
-chmod 400 ~/.ssh/id_rsa
+if [ -e "~/.ssh/id_rsa" ]; then
+    chmod 400 ~/.ssh/id_rsa
+fi
 
 $@
